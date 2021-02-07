@@ -1,0 +1,45 @@
+.header {
+  background-color: #696868;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 0 40px 25px;
+}
+
+.header > h1 {
+  font-size: 45px;
+  margin-bottom: 10px;
+}
+
+.header > h5 {
+  font-size: 24px;
+}
+
+.data-table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.data-table__container {
+  padding: 0 1% 0 2%;
+}
+
+.data-table__row > td {
+  text-align: left;
+  padding: 20px 10px 20px 20px;
+  border-bottom: 1px solid #ccc;
+  background-color: #fff;
+}
+
+.data-table__row--info {
+  color: #333;
+  font-size: 13pt;
+}
+
+.data-table__row--author {
+  color: #999;
+  margin-left: 10px;
+}
