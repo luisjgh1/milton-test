@@ -1,27 +1,46 @@
 import React, { useEffect, useState } from "react";
 
 import Header from "./components/Header";
-import "./index.css";
 import DataTable from "./components/DataTable";
+import { getStories } from "../../utils/service";
+import parseData from "../../utils/dataParse";
+
+import "./index.css";
 
 const DashboardScreen = () => {
   const [stories, setStories] = useState([]);
+
   useEffect(() => {
-    fetch("http://localhost:3001/story", {
-      mode: "cors",
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-      },
-    }).then(async (data) => {
-      const parsedData = await data.json();
-      setStories(parsedData.stories);
+    getStories().then(async (data) => {
+      const realData = await data.json();
+      const parsedData = parseData(realData);
+      setStories(parsedData);
     });
   }, []);
-  console.log(stories);
+
+  const handleClick = (url) => {
+    window.open(url, "_blank");
+  };
+
+  const handleDelete = (id) => {
+    const storageItems = window.localStorage.getItem("deletedStories");
+    const deletedStories = (storageItems && JSON.parse(storageItems)) || [];
+    deletedStories.push(id);
+    window.localStorage.setItem(
+      "deletedStories",
+      JSON.stringify(deletedStories)
+    );
+    setStories((prevStories) => prevStories.filter((story) => story.id !== id));
+  };
+
   return (
     <div className="dashboard-screen">
       <Header />
-      <DataTable rows={stories} />
+      <DataTable
+        rows={stories}
+        onDeleteItem={handleDelete}
+        onClickItem={handleClick}
+      />
     </div>
   );
 };

@@ -27,11 +27,23 @@
   padding: 0 1% 0 2%;
 }
 
+.data-table__row {
+  border-bottom: 1px solid #ccc;
+  background-color: #fff;
+}
+.data-table__row:hover {
+  cursor: pointer;
+  background-color: #fafafa;
+}
+
 .data-table__row > td {
   text-align: left;
   padding: 20px 10px 20px 20px;
-  border-bottom: 1px solid #ccc;
-  background-color: #fff;
+}
+
+.data-table__row > td:hover {
+  cursor: pointer;
+  background-color: #fafafa;
 }
 
 .data-table__row--info {
@@ -42,4 +54,8 @@
 .data-table__row--author {
   color: #999;
   margin-left: 10px;
+}
+
+.trash-icon {
+  filter: invert(50%);
 }

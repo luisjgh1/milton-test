@@ -4,15 +4,18 @@ import PropTypes from "prop-types";
 import TableRow from "./TableRow";
 import "./index.css";
 
-const DataTable = ({ rows = [] }) => {
+const DataTable = ({ rows, onClickItem, onDeleteItem }) => {
   return (
     <div className="data-table__container">
       <table className="data-table">
         {rows.map((row) => {
-          const parsedData = { ...row };
-          parsedData.title = parsedData.title || parsedData.story_title;
-          parsedData.date = parsedData.created_at;
-          return <TableRow {...parsedData} />;
+          return (
+            <TableRow
+              onDeleteItem={onDeleteItem}
+              onClickItem={onClickItem}
+              {...row}
+            />
+          );
         })}
       </table>
     </div>
@@ -29,6 +32,8 @@ DataTable.propTypes = {
       id: PropTypes.string.isRequired,
     })
   ).isRequired,
+  onClickItem: PropTypes.func.isRequired,
+  onDeleteItem: PropTypes.func.isRequired,
 };
 
 export default DataTable;
